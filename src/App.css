@@ -1,0 +1,19 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+Table{
+  border: 1px solid #000000;
+  margin-top: 30px;
+}
+
+tr{
+  border: 1px solid;
+}
+
+th{
+  border: 1px solid;
+}
