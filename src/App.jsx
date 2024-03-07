@@ -2,16 +2,20 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table } from 'react-bootstrap'
 import './App.css'
+import React from 'react'
+import axios from 'axios';
 
 function App() {
 
-  const data = [
-    {"fun_codigo":7,"fun_nome":"CAMILA GALDINO LOBO"},
-    {"fun_codigo":22,"fun_nome":"DOUGLAS MARTINS DE FREITAS"},
-    {"fun_codigo":15,"fun_nome":"FELIPE DE SOUZA"},
-    {"fun_codigo":1,"fun_nome":"JOÃO FRANCISCO FERNANDES"},
-    {"fun_codigo":26,"fun_nome":"RAFAEL BOAVENTURA"}
-  ];
+  
+  const baseURL = "http://187.17.164.80:3000/public/funcionario";
+   const [post, setPost] = React.useState(null);
+
+   React.useEffect(()=> {
+    axios.get(baseURL) //utilizando a biblioteca Axios para fazer uma requisição http get para o baseURL
+    .then((response) => setPost(response.data)) //recebe uma função que é chamada quando a requisição é bem-sucedida
+    .catch((error) => console.error("Erro ao buscar dados: ", error)); //usada para lidar com erros durante a aquisição
+   }, []);
 
   return (
     <>
@@ -30,7 +34,7 @@ function App() {
           </thead>
 
           <tbody>
-            {data.map((funcionario, index) => (
+            {post && post.map((funcionario, index) => ( // && verifica se post é verdadeiro antes de executar post.map()
             <tr key={index}>
               <td>{funcionario.fun_codigo}</td>
               <td>{funcionario.fun_nome}</td>
