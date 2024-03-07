@@ -1,17 +1,28 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  margin: auto;
 }
 
-Table{
-  border: 1px solid #000000;
+.Table{
   margin-top: 30px;
 }
 
-tr{
+.Table tr{
   border: 1px solid;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.Table th{
+  background-color: rgb(144, 197, 212);
+}
 
+.Table td{
+  background-color: rgb(16, 0, 53);
+  color: white;
+}
+
+.Table tr:hover td{
+  background-color: #c1bbc9;
+  color: black;
+  font-weight: bold;
+}

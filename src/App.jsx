@@ -2,19 +2,20 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table } from 'react-bootstrap'
 import './App.css'
-import React from 'react'
-import axios from 'axios';
+import React, { useEffect } from 'react'
 
 function App() {
 
   
   const baseURL = "http://187.17.164.80:3000/public/funcionario";
+
    const [post, setPost] = React.useState(null);
 
-   React.useEffect(()=> {
-    axios.get(baseURL) //utilizando a biblioteca Axios para fazer uma requisição http get para o baseURL
-    .then((response) => setPost(response.data)) //recebe uma função que é chamada quando a requisição é bem-sucedida
-    .catch((error) => console.error("Erro ao buscar dados: ", error)); //usada para lidar com erros durante a aquisição
+   useEffect(() => {
+    fetch(baseURL)
+    .then(response => response.json())
+    .then(data => setPost(data))
+    .catch(error => console.error(error));
    }, []);
 
   return (
@@ -24,7 +25,7 @@ function App() {
       </div>
       
       <div className="container">
-        <Table>
+        <Table className="Table">
 
           <thead>
             <tr>
