@@ -20,7 +20,7 @@ export default function Modal({ isOpen, setModalOpen, selectedEmployee }) {
         transform: 'translate(-50%, -50%)',
         backgroundColor: '#fff',
         borderRadius: '5px',
-        padding: '20px'
+        padding: '20px',
     }
 
     const modal_button = {

@@ -51,7 +51,7 @@ function App() {
               <td>{funcionario.fun_codigo}</td>
               <td>{funcionario.fun_nome}</td>
               <td>
-                  <button onClick={() => handleOpenModal(funcionario)}>
+                  <button className='editar' onClick={() => handleOpenModal(funcionario)}>
                     <img src="src/assets/img/editar.png" alt="Editar contato" />
                   </button>
               </td>
