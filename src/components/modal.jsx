@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 // import { useRouter } from 'next/router';
 
-export default function Modal({ isOpen, setModalOpen, selectedEmployee, setSelectedEmployee }) {
+export default function Modal({ isOpen, setModalOpen, selectedEmployee, setSelectedEmployee}) {
 
     const background_style = {
         position: 'fixed',
@@ -30,11 +30,13 @@ export default function Modal({ isOpen, setModalOpen, selectedEmployee, setSelec
 
     const [editedEmployee, setEditedEmployee] = useState(selectedEmployee || {});
 
+    const dataEmployee = () => {
+        setSelectedEmployee(editedEmployee);
+    };
+
     useEffect(() => {
         setEditedEmployee(selectedEmployee || {});
-    }, [selectedEmployee])
-
-    useEffect (() => {});
+    }, [selectedEmployee]);
 
     if (isOpen){
         return (
@@ -48,7 +50,9 @@ export default function Modal({ isOpen, setModalOpen, selectedEmployee, setSelec
                         <label>Código: </label>
                         <input value={editedEmployee.fun_codigo} onChange={e => setEditedEmployee({editedEmployee, fun_codigo: e.target.value})}/>
                     </div>
-                    <button style={modal_button} onClick={setModalOpen}>Salvar e fechar</button>
+                    <button style={modal_button} onClick={() => [setModalOpen(), 
+                                                                 dataEmployee(),
+                                                                ]}>Salvar e fechar</button>
                     
                 </div>
             </div>

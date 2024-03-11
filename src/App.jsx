@@ -19,7 +19,6 @@ function App() {
     setSelectedEmployee(employee);
     setOpenModal(true);
   };
-  
 
   useEffect(() => {
     fetch(baseURL)
