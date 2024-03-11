@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+// import { useRouter } from 'next/router';
 
-export default function Modal({ isOpen, setModalOpen, selectedEmployee }) {
+export default function Modal({ isOpen, setModalOpen, selectedEmployee, setSelectedEmployee }) {
 
     const background_style = {
         position: 'fixed',
@@ -27,13 +28,25 @@ export default function Modal({ isOpen, setModalOpen, selectedEmployee }) {
         borderRadius: '5px',
     }
 
+    const [editedEmployee, setEditedEmployee] = useState(selectedEmployee || {});
+
+    useEffect(() => {
+        setEditedEmployee(selectedEmployee || {});
+    }, [selectedEmployee])
+
+    useEffect (() => {});
+
     if (isOpen){
         return (
             <div style={background_style}>  
                 <div style={modal_style}>
                     <div>
-                        <h2>{selectedEmployee.fun_nome}</h2>
-                        <p>Código: {selectedEmployee.fun_codigo}</p>
+                        <label>Nome:</label>
+                        <input value={editedEmployee.fun_nome} onChange={e => setEditedEmployee({editedEmployee, fun_nome: e.target.value})}/>
+                    </div>
+                    <div>
+                        <label>Código: </label>
+                        <input value={editedEmployee.fun_codigo} onChange={e => setEditedEmployee({editedEmployee, fun_codigo: e.target.value})}/>
                     </div>
                     <button style={modal_button} onClick={setModalOpen}>Salvar e fechar</button>
                     
