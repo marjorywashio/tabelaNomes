@@ -7,24 +7,30 @@ import Modal from './components/modal'
 
 function App() {
 
+  // URL base do endpoint da API
   const baseURL = "http://187.17.164.80:3000/public/funcionario";
 
+  // armazena os dados dos funcionários recuperados da API
   const [post, setPost] = React.useState(null);
 
+  // controla se o modal está aberto ou fechado
   const [openModal, setOpenModal] = useState(false)
 
+  // armazena os dados do funcionário selecionado para edição
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
+  // função que é acionada quando o botão de edição é clicado. Recebe o objeto selectedEmployee e abre o modal
   const handleOpenModal = (employee) => {
     setSelectedEmployee(employee);
     setOpenModal(true);
   };
 
+  //busca os dados da API
   useEffect(() => {
-    fetch(baseURL)
-    .then(response => response.json())
-    .then(data => setPost(data))
-    .catch(error => console.error(error));
+    fetch(baseURL) // solicitação GET para a URL
+    .then(response => response.json()) // converte a responsa em JSON
+    .then(data => setPost(data)) // define os dados como post
+    .catch(error => console.error(error)); // erros
    }, []);
 
   return (
@@ -44,7 +50,8 @@ function App() {
             </tr>
           </thead>
 
-          <tbody>
+          <tbody> 
+            {/* map itera sobre os elementos da array */}
             {post && post.map((funcionario, index) => ( // && verifica se post é verdadeiro antes de executar post.map()
             <tr key={index}>
               <td>{funcionario.fun_codigo}</td>
@@ -60,7 +67,15 @@ function App() {
         </Table>
 
         <div>
-        <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)} selectedEmployee={selectedEmployee}/>        </div>
+          {selectedEmployee && ( // se tiver um funcionário selecionado
+            <Modal 
+              isOpen={openModal} // controlar o estado de abertura do modal
+              setModalOpen={setOpenModal}  //função que atualiza o estado de abertura
+              selectedEmployee={selectedEmployee}  // qual funcionário selecionado será exibido no modal
+              setSelectedEmployee={setSelectedEmployee} // atualiza o funcionário selecionado
+            />
+          )}
+        </div>
 
       </div>
     </>
