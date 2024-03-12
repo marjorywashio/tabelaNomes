@@ -33,6 +33,11 @@ function App() {
     .catch(error => console.error(error)); // erros
    }, []);
 
+   const updateEmployeeData = (updatedData) => {
+    // Atualiza os dados do funcionário no estado
+    setSelectedEmployee(updatedData);
+  };
+
   return (
     <>
       <div>
@@ -72,7 +77,7 @@ function App() {
               isOpen={openModal} // controlar o estado de abertura do modal
               setModalOpen={setOpenModal}  //função que atualiza o estado de abertura
               selectedEmployee={selectedEmployee}  // qual funcionário selecionado será exibido no modal
-              setSelectedEmployee={setSelectedEmployee} // atualiza o funcionário selecionado
+              setSelectedEmployee={updateEmployeeData} // atualiza o funcionário selecionado
             />
           )}
         </div>
