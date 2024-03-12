@@ -28,7 +28,7 @@ function App() {
   //busca os dados da API
   useEffect(() => {
     fetch(baseURL) // solicitação GET para a URL
-    .then(response => response.json()) // converte a responsa em JSON
+    .then(response => response.json()) // converte a resposta em JSON
     .then(data => setPost(data)) // define os dados como post
     .catch(error => console.error(error)); // erros
    }, []);
@@ -76,7 +76,6 @@ function App() {
             />
           )}
         </div>
-
       </div>
     </>
   )

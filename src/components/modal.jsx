@@ -46,17 +46,20 @@ export default function Modal({ isOpen, setModalOpen, selectedEmployee, setSelec
             // Faz uma solicitação PUT para atualizar os dados do funcionário com base no fun_codigo
             await fetch(`http://187.17.164.80:3000/public/funcionario/${editedEmployee.fun_codigo}`, {
                 method: 'PUT',
-                headers: {
+                headers: { //indica ao servidor o tipo de mídia do corpo da solicitação
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(editedEmployee),
+                body: JSON.stringify(editedEmployee), // os dados do editedEmployee a serem atualizados. São convertidos para uma string JSON
             });
+
             // Após a atualização bem-sucedida, fecha a modal e atualiza o estado
             setModalOpen(false);
+
             // atualiza o estado selectedEmployee com os dados novos
             dataEmployee();
+
             // console.log("ok"); teste
-            
+
         } catch (error) { //erro
             console.error('Erro ao atualizar os dados do funcionário:', error);
         }
