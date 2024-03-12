@@ -33,8 +33,26 @@ function App() {
     .catch(error => console.error(error)); // erros
    }, []);
 
+   // função para atualizar os dados de um funcionários (no post e no selectedEmployee)
+                              // recebe updatedData como parâmetro
    const updateEmployeeData = (updatedData) => {
-    // Atualiza os dados do funcionário no estado
+
+    // Encontra e atualiza os dados do funcionário no estado
+                            // map: percorre todo o array de funcionários no post
+    const updatedPost = post.map(employee => {
+      // verifica se os códigos são iguais
+      if (employee.fun_codigo === updatedData.fun_codigo) {
+        // se forem iguais, é substituído pelos dados atualizados
+        return updatedData;
+      }
+      // retorna sem alterações
+      return employee;
+    });
+
+    // o post é atualizado com novo array de funcionários (dados novos)
+    setPost(updatedPost);
+
+    // o selectedEmployee é atualizado com os novos dados
     setSelectedEmployee(updatedData);
   };
 
