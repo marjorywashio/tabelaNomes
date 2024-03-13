@@ -67,20 +67,20 @@ function App() {
 
           <thead>
             <tr>
-              <th width='80'>Código</th>
-              <th width='400'>Funcionário</th>
+              <th width='90'>Código</th>
+              <th width='380'>Funcionário</th>
               <th width='80'>Editar</th>
             </tr>
           </thead>
 
           <tbody> 
             {/* map itera sobre os elementos da array */}
-            {post && post.map((funcionario, index) => ( // && verifica se post é verdadeiro antes de executar post.map()
-            <tr key={index}>
-              <td>{funcionario.fun_codigo}</td>
-              <td>{funcionario.fun_nome}</td>
-              <td>
-                  <button className='editar' onClick={() => handleOpenModal(funcionario)}>
+            {post && post.map((employee) => ( // && verifica se post é verdadeiro antes de executar post.map()
+            <tr key={employee.fun_codigo}>
+              <td>{employee.fun_codigo}</td>
+              <td>{employee.fun_nome}</td>
+              <td className='colEditar'>
+                  <button className='editar' onClick={() => handleOpenModal(employee)}>
                     <img src="src/assets/img/editar.png" alt="Editar contato" />
                   </button>
               </td>
@@ -90,7 +90,7 @@ function App() {
         </Table>
 
         <div>
-          {selectedEmployee && ( // se tiver um funcionário selecionado
+          {selectedEmployee && ( // somente se tiver um funcionário selecionado
             <Modal 
               isOpen={openModal} // controlar o estado de abertura do modal
               setModalOpen={setOpenModal}  //função que atualiza o estado de abertura

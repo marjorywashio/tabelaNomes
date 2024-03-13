@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Modal({ isOpen, setModalOpen, selectedEmployee, setSelectedEmployee}) {
 
@@ -19,17 +19,34 @@ export default function Modal({ isOpen, setModalOpen, selectedEmployee, setSelec
         left: '50%',
         transform: 'translate(-50%, -50%)',
         backgroundColor: '#fff',
-        borderRadius: '5px',
+        borderRadius: '3px',
         padding: '20px',
+        height: '160px',
+        width: '360px',        
     }
 
     const modal_button = {
         borderRadius: '5px',
+        border: '1px solid black',
+        backgroundColor: 'white',
+        padding: '3px 5px'
+    }
+
+    const inputStyle={
+        marginBottom: '10px',
+        marginLeft: '10px',
+        padding: '3px',
     }
 
     // guarda os dados do funcionário a ser editado no modal. É iniciado com o selectedEmployee
     const [editedEmployee, setEditedEmployee] = useState(selectedEmployee);
 
+    // atualiza os dados do funcionário editado quando o funcionário selecionado muda
+    // só será executado se o selectedEmployee mudar
+    // se selectedEmployee mudar, atualiza o editedEmployee com os novos dados do selectedEmployee
+    useEffect(() => {
+        setEditedEmployee(selectedEmployee);
+    }, [selectedEmployee]);
     
     const handleSaveAndClose = () => {
         // Atualiza os dados do funcionário no estado do componente App
@@ -44,14 +61,20 @@ export default function Modal({ isOpen, setModalOpen, selectedEmployee, setSelec
                     <div>
                         <label>Nome:</label>
                         {/* ao editar os dados, a função setEditedEmployee é chamada para atualizar o editedEmployee (... = cópia) */}
-                        <input value={editedEmployee.fun_nome} onChange={e => setEditedEmployee({...editedEmployee, fun_nome: e.target.value})}/>
+                        <input 
+                            style={inputStyle}
+                            value={editedEmployee.fun_nome} 
+                            onChange={e => setEditedEmployee({...editedEmployee, fun_nome: e.target.value})}/>
                     </div>
+
                     <div>
                         <label>Código: </label>
-                        {/* disabled pois o código não pode ser alterado */}
-                        <input disabled value={editedEmployee.fun_codigo}/>
+                        <input 
+                            style={inputStyle}
+                            disabled /* disabled pois o código não pode ser alterado */
+                            value={editedEmployee.fun_codigo}/>
                     </div>
-                    <button style={modal_button} onClick={handleSaveAndClose}>Salvar e fechar</button>
+                    <button className="button" style={modal_button} onClick={handleSaveAndClose}>Salvar e fechar</button>
                     
                 </div>
             </div>
